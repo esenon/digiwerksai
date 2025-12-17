@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Digiwerks — Custom AI Sales Systems for Service Businesses</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="DigiWerks" />
+<link rel="manifest" href="site.webmanifest" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* --- 1. ENHANCED COLOR PALETTE & ROOT STYLES --- */
+:root{
+  --navy:#081829; 
+  --navy-soft:#1a3250;
+  --black:#0a0a0a;
+  --gray:#6b7280;
+  --light:#f5f7fa;
+  --card:#ffffff;
+  --accent-blue: #3b82f6; 
+  --cta-gradient: linear-gradient(135deg, #4c1d95, #1e40af);
+  --hover-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,sans-serif;
+  background:radial-gradient(1000px 500px at 50% -200px,#eef2f7,#f8fafc);
+  color:var(--black);
+  line-height:1.7;
+  transition: all 0.3s ease-out; /* Smoother scroll transition */
+}
+
+h1,h2,h3{
+  font-family:'Space Grotesk',sans-serif;
+  letter-spacing:-.8px; 
+  line-height:1.2;
+}
+
+/* --- LOGO STYLES (UPDATED) --- */
+.logo-container {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--navy);
+}
+
+/* Removed old .logo-icon. Added styling for the image. */
+.logo-image {
+    height: 30px; 
+    width: auto;
+    display: block;
+    margin-right: 8px; /* Space between icon and text */
+}
+
+.logo-text {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size:1.4rem; 
+    font-weight: 800; 
+}
+
+
+/* --- NAVIGATION BAR --- */
+nav{
+  position:sticky;top:0;z-index:10;
+  background:rgba(255,255,255,.98);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid #e5e7eb;
+  padding:16px 40px;
+  display:flex;justify-content:space-between;align-items:center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+}
+nav a{margin-left:24px;font-size:.95rem;color:#4b5563;text-decoration:none; transition: color .2s}
+nav a:hover{color:var(--navy)}
+
+.btn{
+  background:var(--cta-gradient); 
+  color:#fff;padding:12px 20px;border-radius:10px;
+  font-weight:600;
+  box-shadow:0 10px 25px rgba(11,28,45,.2), 0 0 0 4px rgba(76, 29, 149, 0.1); 
+  border:none;cursor:pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all .3s ease;
+}
+.btn:hover{
+  transform: translateY(-1px);
+  box-shadow:0 12px 30px rgba(11,28,45,.3), 0 0 0 4px rgba(76, 29, 149, 0.2);
+}
+
+/* --- HEADER / HERO SECTION --- */
+header{
+  text-align:center;
+  padding:160px 20px 120px; 
+  max-width:1100px;margin:auto;
+}
+header h1{
+  font-size:4.2rem; 
+  max-width:1000px;margin:auto;
+}
+header p{
+  max-width:800px;margin:28px auto;
+  color:var(--gray);font-size:1.2rem; 
+}
+
+.badges{
+  display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:40px
+}
+.badges span{
+  background:#fff;border:1px solid #e5e7eb;
+  padding:10px 16px;border-radius:999px;
+  font-size:.9rem;
+  font-weight:600;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+}
+
+/* --- SECTIONS & GRIDS --- */
+section{padding:120px 20px;max-width:1200px;margin:auto}
+h2{text-align:center;font-size:3rem;margin-bottom:70px}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); 
+  gap:30px;
+}
+
+.card{
+  background:var(--card);
+  padding:40px; 
+  border-radius:20px; 
+  border:1px solid #e5e7eb;
+  box-shadow:0 10px 30px rgba(0,0,0,.04); /* Softer initial shadow */
+  transform:translateY(20px);
+  opacity:0;
+  transition:all .6s ease;
+  cursor: default;
+}
+
+/* NEW: Card Hover Effect */
+.card:hover {
+    box-shadow: var(--hover-shadow);
+    border-color: var(--accent-blue);
+    transform: translateY(-2px);
+}
+
+.card.show{transform:none;opacity:1}
+.card h3{margin-top:0; font-size: 1.5rem; margin-bottom: 10px;}
+.card p{color: #4b5563;}
+
+.icon{
+  width:50px;height:50px; 
+  border-radius:12px;
+  background:var(--accent-blue);
+  display:flex;align-items:center;justify-content:center;
+  font-size: 1.4rem;
+  font-weight:800;
+  color:white; 
+  margin-bottom:20px;
+  box-shadow: 0 8px 15px rgba(59, 130, 246, 0.3);
+}
+
+/* --- CALCULATOR --- */
+.calculator{
+  background:var(--card);
+  padding:50px;
+  border-radius:24px;
+  border:1px solid #e5e7eb;
+  max-width:640px;
+  margin:60px auto 0;
+  box-shadow:0 40px 80px rgba(0,0,0,.05);
+}
+.calculator label{
+  display:block;margin-top:20px;
+  font-weight:600;font-size:.95rem
+}
+.calculator input{
+  width:100%;padding:16px;margin-top:8px;
+  border-radius:12px;
+  border:1px solid #d1d5db;
+  font-size:1.05rem;
+  transition: border-color .2s, box-shadow .2s;
+}
+.calculator input:focus{
+  border-color: var(--accent-blue);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.result{
+  margin-top:40px;
+  background:linear-gradient(135deg,#eef2f7,#f8fafc);
+  padding:30px;
+  border-radius:18px;
+  text-align:center;
+  font-weight:600;
+  border: 1px solid #e5e7eb;
+}
+.result span{
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+
+/* --- FAQ SECTION --- */
+details{
+  background:#fff;padding:26px;
+  border-radius:16px;
+  border:1px solid #e5e7eb;
+  margin-bottom:18px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+  transition: box-shadow .3s, border-color .3s;
+}
+details:hover{
+    box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+    border-color: #d1d5db;
+}
+summary{cursor:pointer;font-weight:700; font-size: 1.1rem; color: var(--navy)}
+details p{padding-top: 15px; margin-bottom: 0; color: #4b5563;}
+
+
+/* --- CTA & FORM STYLES --- */
+.cta{
+  background:var(--cta-gradient); 
+  color:#fff;
+  border-radius:30px;
+  padding:100px 30px; 
+  text-align:center;
+  box-shadow:0 60px 120px rgba(0,0,0,.45), 0 0 0 10px rgba(76, 29, 149, 0.2);
+}
+.cta h2{color:#fff; margin-bottom: 20px; font-size: 3.5rem; letter-spacing: -1px;}
+.cta p{color:#dbeafe;max-width:720px;margin:20px auto; font-size: 1.1rem;}
+
+.lead-form{
+  max-width:800px;
+  margin:50px auto 0;
+  background:rgba(255,255,255,.1); 
+  padding:45px;
+  border-radius:28px;
+  backdrop-filter:blur(10px);
+  border: 1px solid rgba(255,255,255,.2);
+}
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+}
+.form-grid input{
+  width:100%;
+  padding:18px; 
+  border-radius:14px;
+  border:none;
+  font-size:1rem;
+  background: #f3f4f6; 
+}
+.form-grid input::placeholder{
+    color: #9ca3af;
+}
+
+.consent{
+  display:flex;
+  gap:12px;
+  font-size:.85rem;
+  line-height:1.5;
+  color:#e5e7eb;
+  margin-top:20px;
+  text-align: left;
+}
+.consent input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    background: #f3f4f6;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.lead-form .btn{
+    background: #ffffff;
+    color: var(--navy);
+    box-shadow: 0 8px 20px rgba(0,0,0,.2);
+    font-weight: 700;
+    transition: all .2s;
+}
+.lead-form .btn:hover{
+    background: #f3f4f6;
+    transform: none;
+    box-shadow: 0 8px 20px rgba(0,0,0,.3);
+}
+
+/* --- FOOTER --- */
+footer{
+  background:var(--navy);
+  color:#9ca3af;
+  text-align:center;
+  padding:70px 20px
+}
+footer strong{color: #ffffff;}
+footer a{color:#9ca3af;margin:0 12px;text-decoration:none; transition: color .2s}
+footer a:hover{color: #ffffff;}
+
+/* --- RESPONSIVE ADJUSTMENTS --- */
+@media (max-width: 768px) {
+    header h1 { font-size: 2.8rem; letter-spacing: -1px; }
+    h2 { font-size: 2.2rem; margin-bottom: 50px; }
+    nav { padding: 16px 20px; }
+    nav a { margin-left: 12px; }
+    .cta h2 { font-size: 2.5rem; }
+    .form-grid { grid-template-columns: 1fr; gap: 15px; }
+    .lead-form { padding: 30px; }
+    .logo-text { font-size: 1.2rem; }
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a href="#" class="logo-container">
+    <img src="digiwerkslogo.png" alt="Digiwerks Icon" class="logo-image">
+    <span class="logo-text">Digiwerks</span>
+  </a>
+  <div>
+    <a href="#solutions">Solutions</a>
+    <a href="#how">Process</a>
+    <a href="#faq">FAQs</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact" class="btn">Get a custom offer</a>
+  </div>
+</nav>
+
+<header>
+  <h1>AI booking systems built around how <em>your</em> business actually operates.</h1>
+  <p>
+    Digiwerks builds deeply customized AI sales systems that answer every lead, qualify real opportunities,
+    overcome common objections, and book directly into your workflow — 24/7.
+    Every system is mapped to your services, your local market, and your internal process.
+  </p>
+
+  <a href="#contact" class="btn" style="margin-top: 20px;">Get Started Today</a>
+
+  <div class="badges">
+    <span>24/7 answering</span>
+    <span>CRM-native</span>
+    <span>Local market trained</span>
+    <span>No contracts, only results</span>
+  </div>
+</header>
+
+<section id="solutions">
+<h2>Why service businesses choose Digiwerks</h2>
+<div class="grid">
+  <div class="card"><div class="icon">🤖</div><h3>Local & service-specific</h3><p>Your AI understands where you work, what customers in your area expect, and which jobs are worth taking.</p></div>
+  <div class="card"><div class="icon">📞</div><h3>Never miss a lead</h3><p>Every call, text, and form is handled instantly — including after hours and missed calls.</p></div>
+  <div class="card"><div class="icon">🗓️</div><h3>Books automatically</h3><p>Qualified jobs land directly in your calendar or dispatch system with full context attached.</p></div>
+</div>
+</section>
+
+<section id="how">
+<h2>How your system is built</h2>
+<div class="grid">
+  <div class="card"><div class="icon">💡</div><h3>Business deep-dive</h3><p>We map pricing logic, service rules, ideal jobs, and objections unique to your business.</p></div>
+  <div class="card"><div class="icon">🧠</div><h3>Custom AI training</h3><p>Your AI is trained on real scenarios, real conversations, and real workflows.</p></div>
+  <div class="card"><div class="icon">🚀</div><h3>Launch & optimization</h3><p>We continuously refine performance instead of leaving you with a static tool.</p></div>
+</div>
+</section>
+
+<section>
+<h2>Missed-call revenue estimator</h2>
+<div class="calculator">
+  <label>Average job value ($)<input id="avgValue" type="number" value="150"></label>
+  <label>Missed leads per week<input id="missedCalls" type="number" value="3"></label>
+  <label>Close rate (%)<input id="closeRate" type="number" value="20"></label>
+  <label>Monthly service cost ($)<input id="monthlyCost" type="number" value="300"></label>
+  <div class="result" id="calcResult"></div>
+</div>
+</section>
+
+<section id="faq">
+<h2>Common questions</h2>
+<details><summary>Is this just a chatbot?</summary><p>No — this is a full sales and booking system across voice, text, and CRM. It's designed to perform complex sales logic, not just give canned answers.</p></details>
+<details><summary>Can I keep my current number?</summary><p>Yes, we can port your existing business number to our platform or provision a new one for you.</p></details>
+<details><summary>How fast can this go live?</summary><p>Typically within days once we have completed the deep-dive and integrations are confirmed, usually 7-10 business days.</p></details>
+<details><summary>Is there a contract?</summary><p>We operate on a month-to-month basis. We earn your business every month through performance.</p></details>
+</section>
+
+<section class="cta" id="contact">
+<h2>Get a system built specifically for your business</h2>
+<p>Tell us what you do, where you operate, and what you want automated — we’ll design the right setup and send a custom quote.</p>
+
+<form class="lead-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+  <div class="form-grid">
+    <input name="name" placeholder="Full Name" required>
+    <input name="phone" placeholder="Phone *" required>
+    <input name="email" type="email" placeholder="Business Email *" required>
+    <input type="hidden" name="Estimated Monthly Revenue Recovered" id="hiddenRevenue">
+  </div>
+
+  <label class="consent">
+    <input type="checkbox" required>
+    By providing your phone number, you agree to receive calls or texts, including automated or AI-generated messages.
+    Reply STOP to opt out.
+  </label>
+
+  <label class="consent">
+    <input type="checkbox" required>
+    I agree to receive marketing and promotional messages. Message & data rates may apply.
+  </label>
+
+  <button class="btn" style="margin-top:28px;width:100%">Request my offer</button>
+</form>
+</section>
+
+<footer>
+© 2025 <strong style="font-family: 'Space Grotesk', sans-serif;">Digiwerks</strong> · <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a>
+</footer>
+
+<script>
+// Logic for fading in the cards on scroll
+const cards=document.querySelectorAll('.card');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')})
+},{threshold:.15});
+cards.forEach(c=>observer.observe(c));
+
+// Logic for the calculator and sending value to the form
+const inputs=document.querySelectorAll('#avgValue,#missedCalls,#closeRate,#monthlyCost');
+inputs.forEach(i=>i.addEventListener('input',calc));
+
+function calc(){
+  const v=+avgValue.value,m=+missedCalls.value,c=+closeRate.value/100,cost=+monthlyCost.value;
+  const hiddenRevenueInput = document.getElementById('hiddenRevenue');
+
+  if(!v||!m||!c||!cost){
+    calcResult.textContent='Enter values to see results.';
+    hiddenRevenueInput.value = 'N/A';
+    return;
+  }
+  
+  const lost=v*m*c*4.33; 
+  const roi=((lost-cost)/cost)*100;
+  
+  // Update the visible result
+  calcResult.innerHTML=`Monthly revenue recovered<br>
+  <span style="font-size:2rem;color:var(--navy);font-weight:700;">$${lost.toFixed(2)}</span><br><br>
+  Estimated ROI<br><span style="font-size:1.4rem;font-weight:700;">${roi.toFixed(1)}%</span>`;
+
+  // Update the hidden form field with the calculated revenue
+  hiddenRevenueInput.value = `$${lost.toFixed(2)}`;
+}
+
+// Run the calculation on page load
+calc();
+</script>
+
+</body>
+</html>
